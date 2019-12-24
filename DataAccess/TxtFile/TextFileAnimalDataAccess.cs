@@ -28,7 +28,7 @@ namespace DataAccess.TxtFile
         public List<AnimalDto> GetAllAnimals()
         {
             var fileText = File.ReadAllText(_path);
-            var animalCsvs = fileText.Split(Environment.NewLine);
+            var animalCsvs = fileText.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
             return animalCsvs.Select(x => AnimalDto.FromCsv(x)).ToList();
         }
 
