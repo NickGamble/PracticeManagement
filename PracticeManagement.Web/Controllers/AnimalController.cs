@@ -47,8 +47,7 @@ namespace PracticeManagement.Web.Controllers
             {
                 ModelState.AddModelError("MicrochipId", ex.Message);
             }
-
-            return View(model);
+            return RedirectToAction("ViewAll");
         }
 
         public IActionResult Details(AnimalModel model)

@@ -25,6 +25,7 @@ namespace PracticeManagement.Web.Models
 
         [Display(Name = "Microchip Id")]
         [Required]
+        [StringLength(maximumLength: 13, MinimumLength = 13, ErrorMessage = "Microchip Id must be exactly 13 characters long")]
         public string MicrochipId { get; set; }   
         
         [Required]
