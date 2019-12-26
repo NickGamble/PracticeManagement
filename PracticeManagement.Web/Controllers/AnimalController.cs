@@ -15,10 +15,6 @@ namespace PracticeManagement.Web.Controllers
         {
             _animalDataAccess = new TextFileAnimalDataAccess(); // TODO: Use IoC container to determine concrete instance of IAnimalDataAccess
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult ViewAll()
         {
@@ -52,6 +48,11 @@ namespace PracticeManagement.Web.Controllers
                 ModelState.AddModelError("MicrochipId", ex.Message);
             }
 
+            return View(model);
+        }
+
+        public IActionResult Details(AnimalModel model)
+        {
             return View(model);
         }
     }
