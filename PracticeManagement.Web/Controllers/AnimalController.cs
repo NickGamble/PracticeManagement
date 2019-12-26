@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common.DataAccess;
 using Common.Exceptions;
@@ -16,16 +17,18 @@ namespace PracticeManagement.Web.Controllers
             _animalDataAccess = new TextFileAnimalDataAccess(); // TODO: Use IoC container to determine concrete instance of IAnimalDataAccess
         }
 
-        public IActionResult ViewAll()
+        public IActionResult ViewAll(string searchString)
         {
-            var model = _animalDataAccess.GetAllAnimals().Select(x => new AnimalModel(x));
+            IEnumerable<AnimalModel> model;
+            if (string.IsNullOrEmpty(searchString))
+            {
+                model = _animalDataAccess.GetAllAnimals().Select(x => new AnimalModel(x));
+            }
+            else
+            {
+                model = _animalDataAccess.SearchAnimals(searchString).Select(x => new AnimalModel(x));                
+            }
             return View(model);
-        }
-
-        public IActionResult Search()
-        {
-            // var model = _animalDataAccess.SearchAnimals();
-            return View();
         }
 
         [HttpGet]
