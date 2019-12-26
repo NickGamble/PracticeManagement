@@ -22,10 +22,17 @@ namespace PracticeManagement.Web.Models
         }
     
         public Guid Id { get; set; }
-        public string MicrochipId { get; set; }        
+
+        [Display(Name = "Microchip Id")]
+        [Required]
+        public string MicrochipId { get; set; }   
+        
+        [Required]
         public string Name { get; set; }
 
         [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [Required]
         public DateTime DateOfBirth { get; set; }
         public string Breed { get; set; }
         public string Species { get; set; }

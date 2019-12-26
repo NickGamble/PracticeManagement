@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Common.DataAccess;
+using Common.Exceptions;
 using DataAccess.TxtFile;
 using Microsoft.AspNetCore.Mvc;
 using PracticeManagement.Web.Models;
@@ -43,7 +42,15 @@ namespace PracticeManagement.Web.Controllers
         public IActionResult Create(AnimalModel model)
         {
             model.Id = Guid.NewGuid();
-            _animalDataAccess.AddAnimal(model.ToDto());
+
+            try
+            {
+                _animalDataAccess.AddAnimal(model.ToDto());
+            }
+            catch(DuplicateMicrochipIdException ex)
+            {
+                ModelState.AddModelError("MicrochipId", ex.Message);
+            }
 
             return View(model);
         }
