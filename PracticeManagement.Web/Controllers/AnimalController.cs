@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.DataAccess;
 using Common.Exceptions;
+using DataAccess.SqlServer;
 using DataAccess.TxtFile;
 using Microsoft.AspNetCore.Mvc;
 using PracticeManagement.Web.Models;
@@ -15,6 +16,7 @@ namespace PracticeManagement.Web.Controllers
         public AnimalController()
         {
             _animalDataAccess = new TextFileAnimalDataAccess(); // TODO: Use IoC container to determine concrete instance of IAnimalDataAccess
+            //_animalDataAccess = new SqlAnimalDataAccess();
         }
 
         public IActionResult ViewAll(string searchString)
