@@ -15,7 +15,9 @@ namespace DataAccess.TxtFile
         public TextFileAnimalDataAccess()
         {
             if (!File.Exists(_path))
-                File.CreateText(_path);
+            {
+                using var sw = File.CreateText(_path);
+            }
         }
 
         public void AddAnimal(AnimalDto animalDto)
